@@ -4,7 +4,7 @@
         <div class="user-info">
             <Dropdown trigger="click" @on-click="clickDropdown">
                 <span class="el-dropdown-link">
-                    <img class="user-logo" src="static/img/img.jpg">
+                    <img class="user-logo" src="../../../static/img/img.jpg">
                     {{username}}
                 </span>
                 <DropdownMenu slot="list">

@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <Menu theme="dark" :active-name="onRoutes" @on-select="selectMenu" :open-names="['form']">
+        <Menu theme="dark" :active-name="getActiveName" @on-select="selectMenu" :open-names="['form']">
             <Submenu name="form">
                 <template slot="title">
                     <Icon type="ios-paper"></Icon>
@@ -21,8 +21,9 @@ export default {
     }
   },
   computed: {
-    onRoutes () {
-      return this.$route.path.replace('/', '')
+    getActiveName () {
+      console.log(this.$route.name)
+      return this.$route.name
     }
   },
   methods: {
@@ -31,9 +32,6 @@ export default {
       this.$router.push({
         name: name
       })
-    },
-    getActiveName () {
-      return this.$route.path.replace('/', '')
     }
   }
 }
