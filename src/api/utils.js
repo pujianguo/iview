@@ -2,7 +2,7 @@ import request from 'superagent'
 import saPrefix from 'superagent-prefix'
 import CryptoJS from 'crypto-js'
 
-import localStore from '../localstore'
+import localStore from './localstore'
 
 export const SERVER_HOST = process.env.SERVER_HOST
 export const CAS_URL = process.env.CAS_URL
@@ -42,6 +42,10 @@ export const joinURL = function (...urls) {
     return '/' + urls.join('/')
   }
   return '/'
+}
+
+export const testRequest = function (url) {
+  return request.get(url)
 }
 
 export const getRequest = function (url) {

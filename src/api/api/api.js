@@ -8,6 +8,11 @@ import {
 } from './utils'
 
 export default {
+  // test
+  testApi: () => {
+    return getRequest('/mock/test.json')
+  },
+
   // logout
   logout: () => {
     return deleteRequest('/logout')

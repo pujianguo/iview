@@ -18,7 +18,7 @@
                     </Input>
                 </FormItem>
                 <FormItem>
-                    <Button @click="submitForm" type="primary" long :loading="logining">登录</Button>
+                    <Button @click="submitForm" type="primary" long :loading="loading">登录</Button>
                 </FormItem>
             </Form>
           </div>
@@ -28,12 +28,14 @@
 
 <script>
 import localStore from '@/api/localstore'
+import api from '@/api/api'
+import {checkRequest} from '@/utils/help'
 
 export default {
   name: 'login',
   data () {
     return {
-      logining: false,
+      loading: false,
       ruleForm: {
         username: '',
         password: ''
@@ -44,7 +46,8 @@ export default {
           // { validator: validaePass }
         ],
         password: [
-          { required: true, message: '请输入密码', trigger: 'blur' }
+          { required: true, message: '请输入密码', trigger: 'blur' },
+          { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
           // { validator: validaePass2 }
         ]
       },
@@ -58,14 +61,15 @@ export default {
     submitForm (ev) {
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
-          this.logining = true
-          setTimeout(() => {
-            // 访问登陆接口，返回验证信息，保存在store中
-            // 如下，假设返回的信息是data
-            let data = {token: 'token', secret: 'secret'}
-            this.logining = false
-            this.saveAuth(data)
-          }, 1500)
+          this.loading = true
+          api.testApiLogin(this.ruleForm).end((err, resp) => {
+            this.loading = false
+            if (!checkRequest(resp)) {
+              console.log('err', err)
+              return false
+            }
+            this.saveAuth(resp.body)
+          })
         } else {
           console.log('error submit!!')
           return false
