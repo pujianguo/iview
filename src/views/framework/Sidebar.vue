@@ -9,6 +9,7 @@
                 <MenuItem name="baseform">基本表单</MenuItem>
                 <MenuItem name="edit">编辑器</MenuItem>
                 <MenuItem name="markdown">MarkDown</MenuItem>
+                <MenuItem name="codemirror">CodeMirror</MenuItem>
             </Submenu>
         </Menu>
     </div>

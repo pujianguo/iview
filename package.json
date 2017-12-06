@@ -20,6 +20,7 @@
     "iview": "^2.7.4",
     "jquery": "^3.2.1",
     "jstree": "^3.3.4",
+    "mockjs": "^1.0.1-beta3",
     "store": "^2.0.12",
     "superagent": "^3.8.1",
     "superagent-prefix": "^0.0.2",

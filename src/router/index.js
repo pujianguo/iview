@@ -12,6 +12,7 @@ import Form from '@/components/form/Form'
 import BaseForm from '@/components/form/BaseForm'
 import Edit from '@/components/form/Edit'
 import MarkDown from '@/components/form/MarkDown'
+import CodeMirror from '@/components/form/CodeMirror'
 
 Vue.use(Router)
 
@@ -57,6 +58,11 @@ export default new Router({
               path: 'markdown',
               name: 'markdown',
               component: MarkDown
+            },
+            {
+              path: 'codemirror',
+              name: 'codemirror',
+              component: CodeMirror
             }
           ]
         },
