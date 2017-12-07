@@ -1,8 +1,10 @@
 <template>
     <div name="event">
+        <h1>事件</h1>
         <p> click: <Button type="primary" @click="onClick">click</Button> </p>
         <p> keydown: <input type="text" name="name" @keydown="onKeyDown"> </p>
         <p> keydown.enter: <input type="text" name="name" @keydown.enter="onKeyDown"> </p>
+        <h1> 动态组件 </h1>
         <p :is="comToRender" :param="param"></p>
     </div>
 </template>

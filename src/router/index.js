@@ -14,6 +14,9 @@ import Edit from '@/components/form/Edit'
 import MarkDown from '@/components/form/MarkDown'
 import CodeMirror from '@/components/form/CodeMirror'
 
+import Other from '@/components/other/Other'
+import Event from '@/components/other/Event'
+
 Vue.use(Router)
 
 export default new Router({
@@ -63,6 +66,19 @@ export default new Router({
               path: 'codemirror',
               name: 'codemirror',
               component: CodeMirror
+            }
+          ]
+        },
+
+        // other
+        {
+          path: 'other',
+          component: Other,
+          children: [
+            {
+              path: 'event',
+              name: 'event',
+              component: Event
             }
           ]
         },

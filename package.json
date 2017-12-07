@@ -24,6 +24,7 @@
     "store": "^2.0.12",
     "superagent": "^3.8.1",
     "superagent-prefix": "^0.0.2",
+    "tinymce": "^4.7.4",
     "vis": "^4.21.0",
     "vue": "^2.5.2",
     "vue-clipboards": "^1.2.0",
