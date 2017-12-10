@@ -16,6 +16,8 @@
 </template>
 <script>
 export default {
+  components: {
+  },
   data () {
     return {
       username: 'test'

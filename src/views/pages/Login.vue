@@ -11,7 +11,7 @@
                     </Input>
                 </FormItem>
                 <FormItem prop="password">
-                    <Input type="password" v-model="ruleForm.password" placeholder="请输入密码">
+                    <Input :type="pwdType" v-model="ruleForm.password" placeholder="请输入密码" @keyup.enter.native="submitForm" icon="ios-eye" @on-click="showPwd">
                         <span slot="prepend">
                             <Icon :size="14" type="locked"></Icon>
                         </span>
@@ -47,14 +47,21 @@ export default {
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }
+          { type: 'string', min: 6, message: '最少6位密码', trigger: 'blur' }
           // { validator: validaePass2 }
         ]
       },
-      checked: true
+      pwdType: 'password'
     }
   },
   methods: {
+    showPwd () {
+      if (this.pwdType === 'password') {
+        this.pwdType = 'text'
+      } else {
+        this.pwdType = 'password'
+      }
+    },
     resetForm () {
       this.$refs['ruleForm'].resetFields()
     },

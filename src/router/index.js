@@ -14,6 +14,9 @@ import Edit from '@/components/form/Edit'
 import MarkDown from '@/components/form/MarkDown'
 import CodeMirror from '@/components/form/CodeMirror'
 
+import Table from '@/components/table/Table'
+import BaseTable from '@/components/table/BaseTable'
+
 import Other from '@/components/other/Other'
 import Event from '@/components/other/Event'
 
@@ -66,6 +69,19 @@ export default new Router({
               path: 'codemirror',
               name: 'codemirror',
               component: CodeMirror
+            }
+          ]
+        },
+
+        // table
+        {
+          path: 'table',
+          component: Table,
+          children: [
+            {
+              path: 'basetable',
+              name: 'basetable',
+              component: BaseTable
             }
           ]
         },

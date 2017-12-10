@@ -11,6 +11,13 @@
                 <MenuItem name="markdown">MarkDown</MenuItem>
                 <MenuItem name="codemirror">CodeMirror</MenuItem>
             </Submenu>
+            <Submenu name="table">
+                <template slot="title">
+                    <Icon type="ios-paper"></Icon>
+                    表格
+                </template>
+                <MenuItem name="basetable">基础表格</MenuItem>
+            </Submenu>
             <Submenu name="other">
                 <template slot="title">
                     <Icon type="ios-paper"></Icon>

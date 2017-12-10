@@ -9,6 +9,10 @@
                 <i class="fa fa-refresh" aria-hidden="true"></i>
                 刷新
             </a>
+            <Alert>
+              基础表单中包含了表单验证，表单提交，表单重置，为提交按钮添加提交状态、最后一个输入框添加回车提交事件
+            </Alert>
+
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">
                 <FormItem label="用户名" prop="name">
                     <Input v-model="formValidate.name" placeholder="请输入用户名"></Input>
@@ -53,7 +57,7 @@
                     </CheckboxGroup>
                 </FormItem>
                 <FormItem label="简介" prop="desc">
-                    <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..."></Input>
+                    <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..." @keyup.enter.native="handleSubmit('formValidate')"></Input>
                 </FormItem>
                 <FormItem>
                     <Button type="primary" @click="handleSubmit('formValidate')" :loading="loading">Submit</Button>

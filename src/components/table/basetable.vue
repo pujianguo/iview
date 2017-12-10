@@ -1,9 +1,9 @@
 <template>
-    <div name="empty_page">
+    <div name="basetable">
         <Card dis-hover>
             <p slot="title">
                 <i class="fa fa-wpforms" aria-hidden="true"></i>
-                title
+                基础表格
             </p>
             <a href="#" slot="extra" @click.prevent="changeLimit">
                 <i class="fa fa-refresh" aria-hidden="true"></i>
@@ -21,7 +21,7 @@
 <script>
 let vm = null
 export default {
-  name: 'emptyPage',
+  name: 'basetable',
   data () {
     return {
     }
