@@ -56,11 +56,12 @@ export default {
   .sidebar{
     display: block;
     position: absolute;
-    width: 250px;
+    width: 240px;
     left: 0;
     top: 70px;
     bottom:0;
     background: #2E363F;
+    overflow-y: scroll;
   }
   .sidebar > ul {
     height:100%;

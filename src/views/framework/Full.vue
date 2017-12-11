@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="">
         <v-head></v-head>
         <v-sidebar></v-sidebar>
         <div class="content">
@@ -7,6 +7,11 @@
                 <router-view></router-view>
             </transition>
         </div>
+        <div class="layout-copy">
+            2011-2016 &copy; Powered by 新浪私有云平台
+        </div>
+
+        <Back-top></Back-top>
     </div>
 </template>
 
@@ -24,7 +29,7 @@
 .content{
   background: none repeat scroll 0 0 #fff;
   position: absolute;
-  left: 250px;
+  left: 240px;
   right: 0;
   top: 70px;
   bottom: 0;
@@ -32,5 +37,11 @@
   padding: 40px;
   box-sizing: border-box;
   overflow-y: scroll;
+}
+.layout-copy{
+    text-align: center;
+    padding: 10px;
+    color: #999;
+    background: #fff;
 }
 </style>
