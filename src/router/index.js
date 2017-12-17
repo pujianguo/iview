@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Login from '@/views/pages/Login'
 import Logout from '@/views/pages/Logout'
 import NotFound from '@/views/pages/NotFound'
+import Page1 from '@/views/pages/Page1'
 
 import Full from '@/views/framework/Full'
 import Home from '@/components/home/Home'
@@ -26,6 +27,11 @@ Vue.use(Router)
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/page1',
+      name: 'page1',
+      component: Page1
+    },
     {
       path: '/login',
       name: 'login',
