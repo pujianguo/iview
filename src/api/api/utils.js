@@ -44,6 +44,36 @@ export const joinURL = function (...urls) {
   return '/'
 }
 
+export const _getRequest = function (url) {
+  const promise = request.get(url)
+  return new Promise((resolve, reject) => {
+    promise.end(function (err, resp) {
+      if (!err) {
+        resolve(resp.text)
+      } else {
+        reject(err)
+      }
+    })
+  })
+}
+
+export const _postRequest = function (url, data) {
+  const promise = request.post(url, data)
+  return new Promise((resolve, reject) => {
+    promise.end(function (err, resp) {
+      console.log('resp')
+      console.log(resp)
+      console.log('err')
+      console.log(err)
+      if (!err) {
+        resolve(resp)
+      } else {
+        reject(err)
+      }
+    })
+  })
+}
+
 export const getRequest = function (url) {
   return request.get(url)
     .use(setNevisSignature)

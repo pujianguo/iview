@@ -4,10 +4,22 @@ import {
   postRequest,
   putRequest,
   deleteRequest,
-  patchRequest
+  patchRequest,
+  _getRequest,
+  _postRequest
 } from './utils'
 
 export default {
+  getUser: () => {
+    const url = 'http://pujianguo.com/api/get.php'
+    return _getRequest(url)
+  },
+
+  addUser: (data) => {
+    const url = 'http://pujianguo.com/api/get.php'
+    return _postRequest(url, data)
+  },
+
   // test
   testApi: () => {
     return getRequest('/mock/test.json')

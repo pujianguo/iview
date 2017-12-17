@@ -24,6 +24,7 @@
                     其他
                 </template>
                 <MenuItem name="event">事件</MenuItem>
+                <MenuItem name="async">异步请求</MenuItem>
             </Submenu>
         </Menu>
     </div>
@@ -37,13 +38,11 @@ export default {
   },
   computed: {
     getActiveName () {
-      console.log(this.$route.name)
       return this.$route.name
     }
   },
   methods: {
     selectMenu (name) {
-      console.log(name)
       this.$router.push({
         name: name
       })
