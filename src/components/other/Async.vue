@@ -7,9 +7,8 @@
 
 <script>
 import api from '@/api/api/api'
-import asyncFunc from  '@/api/api/asyncGet'
+import asyncFunc from '@/api/api/asyncGet'
 
-let vm = null
 let defaultData = {
   name: 'testname',
   params: []
@@ -32,8 +31,8 @@ export default {
       return new Promise(function (resolve, reject) {
         setTimeout(function () {
           // 模拟出错了，返回 ‘error’
-          reject('error')
-          // resolve('ok')
+          // reject('error')
+          resolve('ok')
         }, time)
       })
     },
@@ -72,7 +71,7 @@ export default {
         console.log('bbb')
       })
     },
-    async initDataByCommon() {
+    async initDataByCommon () {
       console.log('init')
       let se = await asyncFunc.asyncSleep()
       console.log('se:', se)
