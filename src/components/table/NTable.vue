@@ -120,9 +120,11 @@ export default {
       }
     },
     changePage (page) {
+      this.selectionChange([])
       this.nPage.current = page
     },
     search () {
+      this.selectionChange([])
       this.nPage.current = 1
       this.getPageData()
     },
@@ -141,7 +143,7 @@ export default {
           }
         })
         return ret
-      } 
+      }
       return data
     },
     getPageData () {

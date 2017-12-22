@@ -60,8 +60,8 @@
                     <Input v-model="formValidate.desc" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..." @keyup.enter.native="handleSubmit('formValidate')"></Input>
                 </FormItem>
                 <FormItem>
-                    <Button type="primary" @click="handleSubmit('formValidate')" :loading="loading">Submit</Button>
-                    <Button type="ghost" @click="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
+                    <Button type="primary" @click.native="handleSubmit('formValidate')" :loading="loading">Submit</Button>
+                    <Button type="ghost" @click.native="handleReset('formValidate')" style="margin-left: 8px">Reset</Button>
                 </FormItem>
             </Form>
         </Card>
