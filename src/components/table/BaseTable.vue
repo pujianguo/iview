@@ -14,35 +14,57 @@
               <ul>
                 <li>1.通过插槽来实现添加、删除按钮在导航栏的显示</li>
                 <li>2.显示复选框组件，通过selectionChange来监听iview的Table组件中的选中方法，返回选中项。此数据一般用于批量删除</li>
+                <InputNumber :max="10" :min="1"></InputNumber>
               </ul>
             </Alert>
+            <Form ref="formValidate" :model="editForm" :rules="ruleValidate" :label-width="80" v-if="editForm">
+                      <FormItem label="用户名" prop="name">
+                          <Input v-model="editForm.name" placeholder="请输入用户名"></Input>
+                      </FormItem>
+                      <FormItem label="性别" prop="sex">
+                          <RadioGroup v-model="editForm.sex">
+                              <Radio label="1">男</Radio>
+                              <Radio label="0">女</Radio>
+                          </RadioGroup>
+                      </FormItem>
+                      <FormItem label="年龄" prop="age">
+                          <Input v-model.number="editForm.age" placeholder="请输入年龄"></Input>
+                      </FormItem>
+                      <FormItem label="生日" prop="birth">
+                          <DatePicker type="date" placeholder="Select date" v-model="editForm.birth"></DatePicker>
+                      </FormItem>
+                      <FormItem label="地址" prop="addr">
+                          <Input v-model="editForm.addr" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..." @keyup.enter.native="editSubmit()"></Input>
+                      </FormItem>
+                </Form>
             <NTable :nColumns="usertListColumns" :nData="userListTableData" :page="5" @selectionChange="selectionChange">
               <span slot="handleButtons">
                 <Button type="info" @click="openAddModal">添加</Button>
                 <Button type="error" @click="batchDeleteHandle" :disabled="selectedCount === 0" :loading="batchDeleteBtnLoading">删除<span v-if="selectedCount > 0"> ({{selectedCount}}) </span></Button>
               </span>
             </NTable>
+
         </Card>
 
         <Modal v-model="editFormVisible" :mask-closable="false" :closable="false">
             <div slot="header">
                 <h3> <i class="fa fa-wpforms" aria-hidden="true"></i> 编辑表单 </h3>
             </div>
-            <div style="text-align:center">
+            <div>
                 <Form ref="formValidate" :model="editForm" :rules="ruleValidate" :label-width="80" v-if="editForm">
                       <FormItem label="用户名" prop="name">
                           <Input v-model="editForm.name" placeholder="请输入用户名"></Input>
                       </FormItem>
                       <FormItem label="性别" prop="sex">
                           <RadioGroup v-model="editForm.sex">
-                              <Radio label="male">Male</Radio>
-                              <Radio label="female">Female</Radio>
+                              <Radio label="1">男</Radio>
+                              <Radio label="0">女</Radio>
                           </RadioGroup>
                       </FormItem>
                       <FormItem label="年龄" prop="age">
                           <Input v-model="editForm.age" placeholder="请输入年龄"></Input>
                       </FormItem>
-                      <FormItem label="生日">
+                      <FormItem label="生日" prop="birth">
                           <DatePicker type="date" placeholder="Select date" v-model="editForm.birth"></DatePicker>
                       </FormItem>
                       <FormItem label="地址" prop="addr">
@@ -64,8 +86,8 @@ import NTable from './NTable'
 let vm = null
 let defaultFormData = {
   name: '',
-  sex: -1,
-  age: 0,
+  sex: 1,
+  age: 20,
   birth: '',
   addr: ''
 }
@@ -73,29 +95,17 @@ let ruleValidate = {
   name: [
     { required: true, message: 'The name cannot be empty', trigger: 'blur' }
   ],
-  mail: [
-    { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
-    { type: 'email', message: 'Incorrect email format', trigger: 'blur' }
+  sex: [
+    { required: true, message: 'Please select sex', trigger: 'change' }
   ],
-  city: [
-    { required: true, message: 'Please select the city', trigger: 'change' }
+  age: [
+    { required: true, type: 'number', message: 'The age cannot be empty', trigger: 'blur' }
   ],
-  gender: [
-    { required: true, message: 'Please select gender', trigger: 'change' }
-  ],
-  interest: [
-    { required: true, type: 'array', min: 1, message: 'Choose at least one hobby', trigger: 'change' },
-    { type: 'array', max: 2, message: 'Choose two hobbies at best', trigger: 'change' }
-  ],
-  date: [
+  birth: [
     { required: true, type: 'date', message: 'Please select the date', trigger: 'change' }
   ],
-  time: [
-    { required: true, type: 'date', message: 'Please select time', trigger: 'change' }
-  ],
-  desc: [
-    { required: true, message: 'Please enter a personal introduction', trigger: 'blur' },
-    { type: 'string', min: 20, message: 'Introduce no less than 20 words', trigger: 'blur' }
+  addr: [
+    { required: true, message: 'Please enter a personal introduction', trigger: 'blur' }
   ]
 }
 export default {
@@ -235,7 +245,7 @@ export default {
     initData () {
       this.userListTableData = jsonData.map((x, i) => {
         x.index = i
-        return  x
+        return x
       })
     },
     selectionChange (val) {
@@ -245,18 +255,26 @@ export default {
     // edit about
     openAddModal () {
       this.editFormVisible = true
-      this.editForm = Object.assign({}, defaultFormData);
+      this.editForm = Object.assign({}, defaultFormData)
     },
     openEditModal (index) {
       this.editForm = Object.assign({}, this.userListTableData[index])
+      console.log(this.editForm)
       this.editFormVisible = true
     },
     closeEditModal () {
       this.editFormVisible = false
+      this.$refs['ruleValidate'] && this.$refs['ruleValidate'].resetFields()
     },
     addHandle () {
       let data = this.editForm
-      this.addSubmit(data)
+      this.$refs['ruleValidate'].validate((valid) => {
+        if (valid) {
+          this.addSubmit(data)
+        } else {
+          this.$Message.error('Fail!')
+        }
+      })
     },
     async addSubmit (data) {
       this.editSubmitBtnLoading = true
@@ -270,6 +288,13 @@ export default {
     },
     editHandle () {
       let data = this.editForm
+      this.$refs['ruleValidate'].validate((valid) => {
+        if (valid) {
+          this.editSubmit(data)
+        } else {
+          this.$Message.error('Fail!')
+        }
+      })
       this.editSubmit(data)
     },
     async editSubmit (data) {
