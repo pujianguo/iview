@@ -14,29 +14,9 @@
               <ul>
                 <li>1.通过插槽来实现添加、删除按钮在导航栏的显示</li>
                 <li>2.显示复选框组件，通过selectionChange来监听iview的Table组件中的选中方法，返回选中项。此数据一般用于批量删除</li>
-                <InputNumber :max="10" :min="1"></InputNumber>
               </ul>
             </Alert>
-            <Form ref="formValidate" :model="editForm" :rules="ruleValidate" :label-width="80" v-if="editForm">
-                      <FormItem label="用户名" prop="name">
-                          <Input v-model="editForm.name" placeholder="请输入用户名"></Input>
-                      </FormItem>
-                      <FormItem label="性别" prop="sex">
-                          <RadioGroup v-model="editForm.sex">
-                              <Radio label="1">男</Radio>
-                              <Radio label="0">女</Radio>
-                          </RadioGroup>
-                      </FormItem>
-                      <FormItem label="年龄" prop="age">
-                          <Input v-model.number="editForm.age" placeholder="请输入年龄"></Input>
-                      </FormItem>
-                      <FormItem label="生日" prop="birth">
-                          <DatePicker type="date" placeholder="Select date" v-model="editForm.birth"></DatePicker>
-                      </FormItem>
-                      <FormItem label="地址" prop="addr">
-                          <Input v-model="editForm.addr" type="textarea" :autosize="{minRows: 2,maxRows: 5}" placeholder="Enter something..." @keyup.enter.native="editSubmit()"></Input>
-                      </FormItem>
-                </Form>
+
             <NTable :nColumns="usertListColumns" :nData="userListTableData" :page="5" @selectionChange="selectionChange">
               <span slot="handleButtons">
                 <Button type="info" @click="openAddModal">添加</Button>
@@ -83,7 +63,8 @@
 <script>
 import {jsonData} from './list'
 import NTable from './NTable'
-let vm = null
+import {nCopy} from '@/utils/help'
+
 let defaultFormData = {
   name: '',
   sex: 1,
@@ -115,6 +96,7 @@ export default {
   },
   data () {
     return {
+      jsonData: jsonData,
       ruleValidate: ruleValidate,
       editForm: null,
       editFormVisible: false,
@@ -237,16 +219,24 @@ export default {
   computed: {
     selectedCount () {
       return this.selectedList.length
+    },
+    userList () {
+      return this.$store.state.user.userList
     }
   },
   watch: {
-  },
-  methods: {
-    initData () {
-      this.userListTableData = jsonData.map((x, i) => {
+    userList () {
+      this.userListTableData = this.userList.map((x, i) => {
         x.index = i
         return x
       })
+    }
+  },
+  methods: {
+    initData () {
+      console.log('initData')
+      this.$store.dispatch('listUsers', [])
+      this.$store.dispatch('listUsers', nCopy(jsonData))
     },
     selectionChange (val) {
       this.selectedList = val
@@ -311,7 +301,9 @@ export default {
     // delete
     deleteHandle (index) {
       let data = this.userListTableData[index]
-      console.log(data)
+      console.log('store data')
+      console.log(this.getUserById(data.id))
+
       this.$Modal.confirm({
         title: '确认删除',
         content: `确认删除该记录吗？`,
@@ -350,10 +342,14 @@ export default {
       //   // faild
       // }
       this.batchDeleteBtnLoading = false
+    },
+
+    // 功能方法
+    getUserById (id) {
+      return this.$store.getters.getUserById(id)
     }
   },
   mounted () {
-    vm = this
     this.initData()
   }
 }

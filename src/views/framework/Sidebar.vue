@@ -25,6 +25,8 @@
                 </template>
                 <MenuItem name="event">事件</MenuItem>
                 <MenuItem name="async">异步请求</MenuItem>
+                <MenuItem name="transitioncss">CSS过渡</MenuItem>
+                <MenuItem name="transitionjs">JS过渡</MenuItem>
             </Submenu>
         </Menu>
     </div>
