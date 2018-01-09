@@ -81,12 +81,9 @@
 
 <script>
 import NTable from './NTable'
-<<<<<<< HEAD
 import {jsonData} from './list'
-=======
 import {nCopy} from '@/utils/help'
 
->>>>>>> 758c176ce724a66673a23108c59f77d31f79b633
 let defaultFormData = {
   name: '',
   sex: 1,
@@ -397,7 +394,6 @@ export default {
       this.batchDeleteBtnLoading = false
     },
 
-<<<<<<< HEAD
     // 批量修改权重
     batchUpdataWeightHandle () {
       let list = []
@@ -465,12 +461,10 @@ export default {
       })
       this.changeWeightModalVisible = false
     },
-=======
     // 功能方法
     getUserById (id) {
       return this.$store.getters.getUserById(id)
     }
->>>>>>> 758c176ce724a66673a23108c59f77d31f79b633
   },
   mounted () {
     this.initData()
