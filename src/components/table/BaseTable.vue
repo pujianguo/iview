@@ -14,7 +14,10 @@
               <ul>
                 <li>1.通过插槽来实现添加、删除按钮在导航栏的显示</li>
                 <li>2.显示复选框组件，通过selectionChange来监听iview的Table组件中的选中方法，返回选中项。此数据一般用于批量删除</li>
+<<<<<<< HEAD
                 <li>3.批量处理某个值，如批量只修改权重</li>
+=======
+>>>>>>> 758c176ce724a66673a23108c59f77d31f79b633
               </ul>
             </Alert>
 
@@ -78,7 +81,12 @@
 
 <script>
 import NTable from './NTable'
+<<<<<<< HEAD
 import {jsonData} from './list'
+=======
+import {nCopy} from '@/utils/help'
+
+>>>>>>> 758c176ce724a66673a23108c59f77d31f79b633
 let defaultFormData = {
   name: '',
   sex: 1,
@@ -110,6 +118,7 @@ export default {
   },
   data () {
     return {
+      jsonData: jsonData,
       ruleValidate: ruleValidate,
       editForm: null,
       editFormVisible: false,
@@ -269,16 +278,24 @@ export default {
   computed: {
     selectedCount () {
       return this.selectedList.length
+    },
+    userList () {
+      return this.$store.state.user.userList
     }
   },
   watch: {
-  },
-  methods: {
-    initData () {
-      this.userListTableData = jsonData.map((x, i) => {
+    userList () {
+      this.userListTableData = this.userList.map((x, i) => {
         x.index = i
         return x
       })
+    }
+  },
+  methods: {
+    initData () {
+      console.log('initData')
+      this.$store.dispatch('listUsers', [])
+      this.$store.dispatch('listUsers', nCopy(jsonData))
     },
     selectionChange (val) {
       this.selectedList = val
@@ -336,7 +353,9 @@ export default {
     // delete
     deleteHandle (index) {
       let data = this.userListTableData[index]
-      console.log(data)
+      console.log('store data')
+      console.log(this.getUserById(data.id))
+
       this.$Modal.confirm({
         title: '确认删除',
         content: `确认删除该记录吗？`,
@@ -378,6 +397,7 @@ export default {
       this.batchDeleteBtnLoading = false
     },
 
+<<<<<<< HEAD
     // 批量修改权重
     batchUpdataWeightHandle () {
       let list = []
@@ -445,6 +465,12 @@ export default {
       })
       this.changeWeightModalVisible = false
     },
+=======
+    // 功能方法
+    getUserById (id) {
+      return this.$store.getters.getUserById(id)
+    }
+>>>>>>> 758c176ce724a66673a23108c59f77d31f79b633
   },
   mounted () {
     this.initData()

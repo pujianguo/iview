@@ -22,6 +22,8 @@ import Other from '@/components/other/Other'
 import Event from '@/components/other/Event'
 import Async from '@/components/other/Async'
 import Network from '@/components/other/Network'
+import TransitionCss from '@/components/other/TransitionCss'
+import TransitionJs from '@/components/other/TransitionJs'
 
 Vue.use(Router)
 
@@ -113,6 +115,16 @@ export default new Router({
               path: 'network',
               name: 'network',
               component: Network
+            },
+            {
+              path: 'transitioncss',
+              name: 'transitioncss',
+              component: TransitionCss
+            },
+            {
+              path: 'transitionjs',
+              name: 'transitionjs',
+              component: TransitionJs
             }
           ]
         },
