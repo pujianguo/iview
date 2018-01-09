@@ -10,7 +10,9 @@
                 刷新
             </a>
             <Alert>
-              基础表单中包含了表单验证，表单提交，表单重置，为提交按钮添加提交状态、最后一个输入框添加回车提交事件
+              <p>1.基础表单中包含了表单验证，表单提交，表单重置，为提交按钮添加提交状态、最后一个输入框添加回车提交事件。</p>
+              <p>2.这个表单可以是table中信息的编辑页面。</p>
+
             </Alert>
 
             <Form ref="formValidate" :model="formValidate" :rules="ruleValidate" :label-width="80">

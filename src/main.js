@@ -15,6 +15,15 @@ Vue.use(iView)
 Vue.use(filter)
 Vue.use(VueClipboards)
 
+router.beforeEach((to, from, next) => {
+  iView.LoadingBar.start()
+  next()
+})
+
+router.afterEach(route => {
+  iView.LoadingBar.finish()
+})
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

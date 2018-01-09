@@ -21,6 +21,7 @@ import BaseTable from '@/components/table/BaseTable'
 import Other from '@/components/other/Other'
 import Event from '@/components/other/Event'
 import Async from '@/components/other/Async'
+import Network from '@/components/other/Network'
 
 Vue.use(Router)
 
@@ -107,6 +108,11 @@ export default new Router({
               path: 'async',
               name: 'async',
               component: Async
+            },
+            {
+              path: 'network',
+              name: 'network',
+              component: Network
             }
           ]
         },

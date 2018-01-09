@@ -25,6 +25,7 @@
                 </template>
                 <MenuItem name="event">事件</MenuItem>
                 <MenuItem name="async">异步请求</MenuItem>
+                <MenuItem name="network">network</MenuItem>
             </Submenu>
         </Menu>
     </div>
