@@ -19,6 +19,9 @@
                 <FormItem label="用户名" prop="name">
                     <Input v-model="formValidate.name" placeholder="请输入用户名"></Input>
                 </FormItem>
+                <FormItem label="年龄" prop="mail">
+                    <Input v-model.number="formValidate.age" placeholder="请输入年龄"></Input>
+                </FormItem>
                 <FormItem label="邮箱" prop="mail">
                     <Input v-model="formValidate.mail" placeholder="请输入邮箱"></Input>
                 </FormItem>
@@ -76,6 +79,7 @@ import {checkRequest} from '@/utils/help'
 
 let defaultForm = {
   name: '',
+  age: 20,
   mail: '',
   city: '',
   gender: '',
@@ -87,6 +91,9 @@ let defaultForm = {
 let ruleValidate = {
   name: [
     { required: true, message: 'The name cannot be empty', trigger: 'blur' }
+  ],
+  age: [
+    { required: true, type: 'number', message: '请填写正确的数字', trigger: 'blur' }
   ],
   mail: [
     { required: true, message: 'Mailbox cannot be empty', trigger: 'blur' },
