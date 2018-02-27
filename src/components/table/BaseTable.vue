@@ -14,10 +14,7 @@
               <ul>
                 <li>1.通过插槽来实现添加、删除按钮在导航栏的显示</li>
                 <li>2.显示复选框组件，通过selectionChange来监听iview的Table组件中的选中方法，返回选中项。此数据一般用于批量删除</li>
-<<<<<<< HEAD
                 <li>3.批量处理某个值，如批量只修改权重</li>
-=======
->>>>>>> 758c176ce724a66673a23108c59f77d31f79b633
               </ul>
             </Alert>
 
@@ -80,9 +77,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import api from '@/api/api/api'
+import {checkRequest, nCopy} from '@/utils/help'
 import NTable from './NTable'
 import {jsonData} from './list'
-import {nCopy} from '@/utils/help'
 
 let defaultFormData = {
   name: '',

@@ -247,6 +247,7 @@ export default {
       this.nodesTable = [...node1, ...node2, ...node3]
       this.linksTable = [...link1, ...link2, ...link3]
       this.options = options
+      let links = null // 防止报错（links 未定义）
       this.network = new links.Network(document.getElementById('chartContent'))
       this.network.draw(this.nodesTable, this.linksTable, this.options)
       links.events.addListener(this.network, 'select', function () {
@@ -264,7 +265,7 @@ export default {
   created () {
   },
   mounted () {
-    this.initChart()
+    // this.initChart()
   }
 }
 </script>

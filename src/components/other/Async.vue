@@ -6,8 +6,7 @@
 </template>
 
 <script>
-import api from '@/api/api/api'
-import asyncFunc from '@/api/api/asyncGet'
+import async from '@/api/api/async'
 
 let defaultData = {
   name: 'testname',
@@ -37,12 +36,31 @@ export default {
       })
     },
 
+    // 同步获取, 并在回掉中执行获取到数据之后的操作
+    getUser () {
+      async.getUser().then(result => {
+        console.log('异步执行')
+        console.log(result)
+        // data handle
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    // 异步获取，有返回值的获取数据
+    async asyncGetUser () {
+      try {
+        return await async.getUser()
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
     async start () {
       try {
         console.log('start')
-        let res = await this.sleep(3000) // 这里得到了一个返回错误
+        let res = await this.sleep(3000)
         console.log(res)
-        // 所以以下代码不会被执行了
+        // 上面得到了一个返回错误时，以下代码不会被执行了
         console.log('end')
         return res
       } catch (err) {
@@ -50,36 +68,15 @@ export default {
       }
     },
 
-    async getUser () {
-      try {
-        return await api.getUser()
-      } catch (err) {
-        console.log(err) // 这里捕捉到错误 `error`
-      }
-    },
-    async initDataByMyPage () {
+    async initData () {
       console.log('init')
+      this.getUser()
       let se = await this.start()
-      if (!se) {
-        return false
-      }
-      console.log('se:', se)
-      let user = await this.getUser()
-      this.data.params = user
-      console.log(user)
-      this.$nextTick(() => {
-        console.log('bbb')
-      })
-    },
-    async initDataByCommon () {
-      console.log('init')
-      let se = await asyncFunc.asyncSleep()
       console.log('se:', se)
       if (!se) {
         return false
       }
-      let user = await asyncFunc.asyncGetUser()
-      this.data.params = user
+      let user = await this.asyncGetUser()
       console.log(user)
       this.$nextTick(() => {
         console.log('bbb')
@@ -87,8 +84,7 @@ export default {
     }
   },
   created () {
-    this.initDataByMyPage()
-    // this.initDataByCommon()
+    this.initData()
   },
   mounted () {
   }
