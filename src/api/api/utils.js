@@ -4,26 +4,40 @@ import CryptoJS from 'crypto-js'
 import {checkRequest} from '@/utils/help'
 import localStore from '../localstore'
 
-// 判断用户是否登陆
-const ua = localStore.getUserAuth()
-const uaFlag = function () {
-  if (ua && ua.token && ua.secret) {
-    return true
-  } else {
-    console.warn('require user_auth')
-    let loginUrl = `/login`
-    console.log(loginUrl)
-    // window.location.href = loginUrl
-    return false
-  }
-}
-
-// export const SERVER_HOST = process.env.SERVER_HOST
-export const SERVER_HOST = 'http://pujianguo.com'
+export const SERVER_HOST = process.env.SERVER_HOST
+// export const SERVER_HOST = 'http://pujianguo.com'
 export const CAS_URL = process.env.CAS_URL
 export const HOST = process.env.HOST
 
-export const apiPrefix = saPrefix(SERVER_HOST + '/api')
+export const apiPrefix = saPrefix(SERVER_HOST + '/')
+
+// 判断用户是否登陆
+const ua = localStore.getUserAuth()
+const uaFlag = function () {
+  // 跳转到登录页面
+  // if (ua && ua.token && ua.secret) {
+  //   return true
+  // } else {
+  //   console.warn('require user_auth')
+  //   let loginUrl = `/login`
+  //   console.log(loginUrl)
+  //   window.location.href = loginUrl
+  //   return false
+  // }
+
+  // sina 统一登录
+  if (ua && ua.token && ua.secret) {
+    return true
+  } else {
+    console.log('CAS_URL', CAS_URL)
+    console.warn('require user_auth')
+    let url = SERVER_HOST + 'login'
+    let loginUrl = `${CAS_URL}login?service=` + encodeURIComponent(url)
+    console.log(loginUrl)
+    window.location.href = loginUrl
+    return false
+  }
+}
 
 export const setNevisSignature = function (req) {
   const [token, secret, nonce] = [ua.token, ua.secret, parseInt(new Date().getTime())]
@@ -47,7 +61,6 @@ export const jsonStr = function (obj) {
 export const joinURL = function (...urls) {
   return '/' + urls.join('/')
 }
-
 
 // 带完整验证
 // export const _getRequest = function (url) {
@@ -102,9 +115,11 @@ export const _postRequest = function (url, data) {
 }
 
 export const getRequest = function (url) {
-  return request.get(url)
-    .use(setNevisSignature)
-    .use(apiPrefix)
+  if (uaFlag()) {
+    return request.get(url)
+      .use(setNevisSignature)
+      .use(apiPrefix)
+  }
 }
 export const postRequest = function (url, body) {
   return request.post(url)

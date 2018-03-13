@@ -13,7 +13,9 @@ import Form from '@/components/form/Form'
 import BaseForm from '@/components/form/BaseForm'
 import Edit from '@/components/form/Edit'
 import MarkDown from '@/components/form/MarkDown'
+import MarkDownShow from '@/components/form/MarkDownShow'
 import CodeMirror from '@/components/form/CodeMirror'
+import Upload from '@/components/form/Upload'
 
 import Table from '@/components/table/Table'
 import BaseTable from '@/components/table/BaseTable'
@@ -71,6 +73,11 @@ export default new Router({
               component: Edit
             },
             {
+              path: 'markdownshow',
+              name: 'markdownshow',
+              component: MarkDownShow
+            },
+            {
               path: 'markdown',
               name: 'markdown',
               component: MarkDown
@@ -79,6 +86,11 @@ export default new Router({
               path: 'codemirror',
               name: 'codemirror',
               component: CodeMirror
+            },
+            {
+              path: 'upload',
+              name: 'upload',
+              component: Upload
             }
           ]
         },

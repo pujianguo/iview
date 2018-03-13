@@ -16,13 +16,29 @@
 </template>
 
 <script>
-  import vHead from './Header.vue'
-  import vSidebar from './Sidebar.vue'
-  export default {
-    components: {
-      vHead, vSidebar
+import vHead from './Header.vue'
+import vSidebar from './Sidebar.vue'
+import api from '@/api/api/api'
+import {checkRequest} from '@/utils/help'
+export default {
+  components: {
+    vHead, vSidebar
+  },
+  methods: {
+    getData () {
+      api.getData().end((err, resp) => {
+        if (!checkRequest(resp)) {
+          console.log('err', err)
+          return
+        }
+        console.log(resp)
+      })
     }
+  },
+  created () {
+    // this.getData()
   }
+}
 </script>
 
 <style scoped>

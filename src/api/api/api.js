@@ -8,6 +8,9 @@ import {
 } from './utils'
 
 export default {
+  getData: () => {
+    return getRequest('/aaa')
+  },
   // test
   testApi: () => {
     return getRequest('/mock/test.json')

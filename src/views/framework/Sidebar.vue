@@ -9,7 +9,9 @@
                 <MenuItem name="baseform">基本表单</MenuItem>
                 <MenuItem name="edit">编辑器</MenuItem>
                 <MenuItem name="markdown">MarkDown</MenuItem>
+                <MenuItem name="markdownshow">MarkDown展示</MenuItem>
                 <MenuItem name="codemirror">CodeMirror</MenuItem>
+                <MenuItem name="upload">文件上传</MenuItem>
             </Submenu>
             <Submenu name="table">
                 <template slot="title">
