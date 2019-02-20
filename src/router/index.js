@@ -23,7 +23,7 @@ import BaseTable from '@/components/table/BaseTable'
 import Other from '@/components/other/Other'
 import Event from '@/components/other/Event'
 import Async from '@/components/other/Async'
-import Network from '@/components/other/Network'
+import LifeCycle from '@/components/other/LifeCycle'
 import TransitionCss from '@/components/other/TransitionCss'
 import TransitionJs from '@/components/other/TransitionJs'
 
@@ -124,9 +124,9 @@ export default new Router({
               component: Async
             },
             {
-              path: 'network',
-              name: 'network',
-              component: Network
+              path: 'lifeCycle',
+              name: 'lifeCycle',
+              component: LifeCycle
             },
             {
               path: 'transitioncss',

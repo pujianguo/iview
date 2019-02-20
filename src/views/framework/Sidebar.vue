@@ -25,6 +25,7 @@
                     <Icon type="ios-paper"></Icon>
                     其他
                 </template>
+                <MenuItem name="lifeCycle">生命周期</MenuItem>
                 <MenuItem name="event">事件</MenuItem>
                 <MenuItem name="async">异步请求</MenuItem>
                 <MenuItem name="network">network</MenuItem>

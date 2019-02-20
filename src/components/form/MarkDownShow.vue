@@ -9,6 +9,7 @@
 
 <script>
 import marked from 'marked'
+let content = 'i am a ~~tast~~ **test**.'
 
 export default{
   data () {
@@ -22,7 +23,7 @@ export default{
     }
   },
   methods: {
-    markdown() {
+    markdown () {
       marked.setOptions({
         renderer: new marked.Renderer(),
         gfm: true,
@@ -39,7 +40,4 @@ export default{
     this.markdown() // 配置，不配置也可以，将使用默认配置
   }
 }
-
-let content = 'i am a ~~tast~~ **test**.'
-
 </script>
